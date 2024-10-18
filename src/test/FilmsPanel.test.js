@@ -1,0 +1,49 @@
+import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+import FilmsPanel from '../Components/FilmsPanel'; 
+import { BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
+
+jest.mock('axios');
+
+describe('FilmsPanel', () => {
+  it('deve renderizar o estado de carregamento inicialmente', () => {
+    render(
+      <BrowserRouter>
+        <FilmsPanel />
+      </BrowserRouter>
+    );
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  });
+
+  it('deve renderizar os filmes quando a chamada à API for bem-sucedida', async () => {
+    const films = [{ id: 1, title: 'Film 1', poster_path: '/film1.jpg' }];
+    axios.get.mockResolvedValueOnce({ data: { results: films } });
+
+    render(
+      <BrowserRouter>
+        <FilmsPanel />
+      </BrowserRouter>
+    );
+
+    // Verifique se os filmes estão sendo renderizados
+    await waitFor(() => {
+      expect(screen.getByText('Film 1')).toBeInTheDocument();
+    });
+  });
+
+  it('deve renderizar uma mensagem de erro quando a chamada à API falhar', async () => {
+    axios.get.mockRejectedValueOnce(new Error('Error fetching films'));
+
+    render(
+      <BrowserRouter>
+        <FilmsPanel />
+      </BrowserRouter>
+    );
+
+    // Verifique se a mensagem de erro está sendo exibida
+    await waitFor(() => {
+      expect(screen.getByText(/error loading films/i)).toBeInTheDocument();
+    });
+  });
+});
