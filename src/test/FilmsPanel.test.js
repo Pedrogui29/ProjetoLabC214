@@ -26,7 +26,7 @@ describe('FilmsPanel', () => {
       </BrowserRouter>
     );
 
-    // Verifique se os filmes estão sendo renderizados
+ 
     await waitFor(() => {
       expect(screen.getByText('Film 1')).toBeInTheDocument();
     });
@@ -41,7 +41,7 @@ describe('FilmsPanel', () => {
       </BrowserRouter>
     );
 
-    // Verifique se a mensagem de erro está sendo exibida
+
     await waitFor(() => {
       expect(screen.getByText(/error loading films/i)).toBeInTheDocument();
     });
