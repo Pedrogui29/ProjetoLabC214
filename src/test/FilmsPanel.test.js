@@ -46,4 +46,18 @@ describe('FilmsPanel', () => {
       expect(screen.getByText(/error loading films/i)).toBeInTheDocument();
     });
   });
+
+  it('deve renderizar uma mensagem "nenhum filme encontrado" quando não houver filmes disponíveis', async () => {
+    axios.get.mockResolvedValueOnce({ data: { results: [] } });
+
+    render(
+      <BrowserRouter>
+        <FilmsPanel />
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/No films available/i)).toBeInTheDocument();
+    });
+  });
 });

@@ -26,7 +26,7 @@ export default function FilmsPanel() {
   }
 
   if (!films.length) {
-    return <div>Loading...</div>;
+    return <div>No films available</div>;
   }
 
   return (
