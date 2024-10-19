@@ -60,4 +60,25 @@ describe('FilmsPanel', () => {
       expect(screen.getByText(/No films available/i)).toBeInTheDocument();
     });
   });
+
+  it('deve renderizar múltiplos filmes corretamente', async () => {
+    const films = [
+      { id: 1, title: 'Film 1', poster_path: '/film1.jpg' },
+      { id: 2, title: 'Film 2', poster_path: '/film2.jpg' },
+      { id: 3, title: 'Film 3', poster_path: '/film3.jpg' }
+    ];
+    axios.get.mockResolvedValueOnce({ data: { results: films } });
+
+    render(
+      <BrowserRouter>
+        <FilmsPanel />
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      films.forEach(film => {
+        expect(screen.getByText(film.title)).toBeInTheDocument();
+      });
+    });
+  });
 });
