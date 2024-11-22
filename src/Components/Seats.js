@@ -118,76 +118,143 @@ export default function Seats() {
 }
 
 const SelectSeat = styled.div`
-    width: 374px;
-    height: 110px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 67px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
     p {
         font-size: 24px;
+        font-weight: bold;
+        color: #E8833A;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
 `;
+
 const ContainerSeat = styled.div`
-    margin-left: 24px;
-    margin-bottom: 20px;
     display: flex;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+    max-width: 400px; /* Limita a largura máxima para manter o layout */
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 `;
+
 const StatusSeat = styled.div`
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 400px;
+
     div {
         display: flex;
-        justify-content: center;
         flex-direction: column;
         align-items: center;
     }
+
     img {
         width: 25px;
         height: 25px;
         margin-bottom: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    img:hover {
+        transform: scale(1.2);
+    }
+
+    p {
+        font-size: 14px;
+        color: #333;
     }
 `;
+
 const InfostoBuy = styled.div`
     width: 100%;
-    margin-left: 24px;
-    margin-top: 41px;
-    margin-bottom: 200px;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
     font-size: 18px;
-    input {
-        width: 327px;
-        height: 45px;
-        margin: 15px;
-        border: 1px solid #AFAFAF;
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin: 10px 0 5px;
     }
+
+    input {
+        width: 100%;
+        height: 45px;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #AFAFAF;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
     button {
-        width: 225px;
-        height: 42px;
+        width: 100%;
+        height: 45px;
         color: white;
         background-color: #E8833A;
         border: none;
-        margin-left: 70px;
-        margin-top: 15px;
+        border-radius: 5px;
         font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+        &:hover {
+            background-color: #d67930;
+            transform: scale(1.05);
+        }
     }
 `;
+
 const Footer = styled.div`
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 117px;
+    height: 120px;
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: #DFE6ED;
+    box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.1);
+
     img {        
-        width: 48px;
-        height: 72px;
+        width: 50px;
+        height: 75px;
         margin-right: 18px;
-        margin-left: 18px;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     }
-    p {
-        margin-bottom: 8px;
+
+    div {
+        text-align: left;
+
+        p {
+            font-size: 16px;
+            margin: 0;
+            color: #333;
+        }
+
+        p:first-child {
+            font-weight: bold;
+        }
     }
 `;

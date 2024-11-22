@@ -4,10 +4,10 @@ import styled from "styled-components";
 export default function Sessions() {
     const { filmId } = useParams();
     const location = useLocation();
-    const navigate = useNavigate(); // Adicionado para navegação
+    const navigate = useNavigate();
     const filmTitle = location.state?.title || "Filme não encontrado";
 
-    // Defina uma lista de sessões como exemplo
+    // Lista de sessões
     const showtimes = [
         { id: 1, time: "15:30", type: "Dublado" },
         { id: 2, time: "16:30", type: "Legendado" },
@@ -15,28 +15,28 @@ export default function Sessions() {
         { id: 4, time: "21:30", type: "Legendado" },
     ];
 
-    // Função para lidar com o clique no card da sessão
+    // Função para clicar no card da sessão
     const handleSessionClick = (sessionId) => {
-        const selectedSession = showtimes.find((session) => session.id === sessionId); // Encontre a sessão selecionada
+        const selectedSession = showtimes.find((session) => session.id === sessionId);
         navigate(`/seats/${sessionId}`, {
             state: {
-                title: filmTitle, // Título do filme
-                day: "01/01/2024", // Data da sessão (substitua pela data real se disponível)
-                time: selectedSession.time // Hora da sessão
-            }
-        }); // Redireciona para a página de seleção de assentos
+                title: filmTitle,
+                day: "01/01/2024",
+                time: selectedSession.time,
+            },
+        });
     };
 
     return (
         <Container>
             <SelectTime>
-                <p>Selecione um horário para o filme: {filmTitle}</p>
+                <p>Selecione um horário para o filme: <strong>{filmTitle}</strong></p>
             </SelectTime>
             <ShowtimeContainer>
                 {showtimes.map((showtime) => (
                     <ShowtimeCard key={showtime.id} onClick={() => handleSessionClick(showtime.id)}>
-                        <p>{showtime.time}</p>
-                        <p>{showtime.type}</p>
+                        <Time>{showtime.time}</Time>
+                        <Type>{showtime.type}</Type>
                     </ShowtimeCard>
                 ))}
             </ShowtimeContainer>
@@ -45,39 +45,72 @@ export default function Sessions() {
 }
 
 const Container = styled.div`
-    width: 375px;
-    margin-bottom: 125px;
+    width: 100vw; /* Garante que o container ocupe toda a largura da tela */
+    height: 100vh; /* Garante que o container ocupe toda a altura da tela */
+    margin: 0; /* Remove qualquer margem */
+    padding: 0; /* Remove qualquer padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza os elementos verticalmente */
+    align-items: center; /* Centraliza os elementos horizontalmente */
+    box-sizing: border-box; /* Garante que largura e altura incluem padding e bordas */
 `;
 
 const SelectTime = styled.div`
-    width: 374px;
-    height: 110px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 67px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px; /* Espaço entre a frase e os cards */
+
     p {
-        font-size: 24px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #333;
+    }
+
+    strong {
+        color: #E8833A;
     }
 `;
 
 const ShowtimeContainer = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center; /* Centraliza os cards horizontalmente */
+    align-items: center; /* Centraliza os cards verticalmente */
+    gap: 20px;
+    width: 100%; /* Garante que os elementos possam ser centralizados */
+    max-width: 600px; /* Limita a largura para não se expandir muito */
 `;
 
 const ShowtimeCard = styled.div`
-    width: 90%;
+    width: 200px;
+    height: 100px;
     background-color: #E8833A;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
     color: white;
+    font-weight: bold;
     cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
     &:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
         background-color: #d67930;
     }
+`;
+
+const Time = styled.p`
+    font-size: 1.5rem;
+    margin: 0;
+`;
+
+const Type = styled.p`
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.8;
 `;
