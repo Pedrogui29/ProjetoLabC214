@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Seat from "../components/Seat";
+import Seat from "../Components/Seat";
 import '@testing-library/jest-dom';
 
 describe("Seat Component", () => {
