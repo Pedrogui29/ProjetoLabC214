@@ -1,5 +1,7 @@
 import { useState } from "react"
 import styled from "styled-components"
+import React from 'react';
+
 
 function selectseats(places, SetPlaces, id, selected, setSelect, nameSeat, SetNameseat, name){
     //tornar o select o inverso do q ele é

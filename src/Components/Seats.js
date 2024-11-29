@@ -4,7 +4,7 @@ import disponivel from "../assets/img/disponivel.png";
 import indisponivel from "../assets/img/indisponivel.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import Seat from "./Seat";
+import Seat from "../components/Seat.js";
 
 export default function Seats() {
     const { sessionId } = useParams();
