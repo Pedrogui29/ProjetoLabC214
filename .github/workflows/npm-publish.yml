@@ -28,7 +28,6 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: build # Este passo depende do job "build" ser concluído
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -41,5 +40,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
+    - name: Run tests and generate HTML report
       run: npm test
+
+    - name: Upload HTML test report
+      uses: actions/upload-artifact@v3
+      with:
+        name: html-test-report
+        path: ./testreports/test-report.html

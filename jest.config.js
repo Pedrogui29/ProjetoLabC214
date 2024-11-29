@@ -4,4 +4,14 @@ module.exports = {
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
   },
+  reporters: [
+    "default",
+    [
+      "jest-html-reporter",
+      {
+        outputPath: "./testreports/test-report.html",
+        pageTitle: "Test Report",
+      },
+    ],
+  ],
 };
