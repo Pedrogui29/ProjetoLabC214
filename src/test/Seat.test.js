@@ -77,4 +77,63 @@ describe("Seat Component", () => {
     
     mockAlert.mockRestore();
   });
+
+  it("handles `places` and `nameSeat` when other seats are already selected", () => {
+    const multipleProps = {
+      ...seatProps,
+      places: [2],
+      nameSeat: ["2B"],
+    };
+  
+    render(<Seat {...multipleProps} />);
+    const seatButton = screen.getByText("1A");
+  
+    fireEvent.click(seatButton);
+  
+    expect(mockSetPlaces).toHaveBeenCalledWith([2, 1]);
+    expect(mockSetNameseat).toHaveBeenCalledWith(["2B", "1A"]);
+  });
+
+  it("renders multiple seats correctly when others are selected", () => {
+    const props = {
+      ...seatProps,
+      places: [2, 3],
+      nameSeat: ["2B", "3C"],
+    };
+
+    render(<Seat {...props} />);
+    const seatButton = screen.getByText("1A");
+
+    fireEvent.click(seatButton);
+
+    expect(mockSetPlaces).toHaveBeenCalledWith([2, 3, 1]);
+    expect(mockSetNameseat).toHaveBeenCalledWith(["2B", "3C", "1A"]);
+  });
+
+  it("updates style correctly for a seat that toggles state", () => {
+    render(<Seat {...seatProps} />);
+    const seatButton = screen.getByText("1A");
+
+    // Seleciona
+    fireEvent.click(seatButton);
+    expect(seatButton.closest("button")).toHaveStyle("background-color: #0E7D71");
+
+    // Remove seleção
+    fireEvent.click(seatButton);
+    expect(seatButton.closest("button")).toHaveStyle("background-color: #7B8B99");
+  });
+
+  it("does not allow removing a seat that is not selected", () => {
+    render(<Seat {...seatProps} />);
+    const seatButton = screen.getByText("1A");
+
+    fireEvent.click(seatButton); // Seleciona
+    fireEvent.click(seatButton); // Remove
+    fireEvent.click(seatButton); // Tenta selecionar de novo
+
+    // Valida estado final após as ações
+    expect(mockSetPlaces).toHaveBeenLastCalledWith([1]);
+    expect(mockSetNameseat).toHaveBeenLastCalledWith(["1A"]);
+  });
+
 });
