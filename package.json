@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.25.8",
     "@babel/plugin-syntax-jsx": "^7.25.7",
     "@babel/plugin-transform-runtime": "^7.25.7",
     "axios": "^1.1.2",
@@ -13,14 +12,13 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.4.2",
-    "react-scripts": "^4.0.3",
     "sort-by": "^1.2.0",
     "styled-components": "^5.3.6",
     "testing-library": "^0.0.2"
   },
   "scripts": {
-    "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
-    "build": "CI=false react-scripts build",
+    "start": "cross-env set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && cross-env CI=false react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject"
   },
@@ -42,13 +40,18 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/preset-env": "^7.25.8",
-    "@babel/preset-react": "^7.25.7",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
+    "babel-loader": "^8.4.1",
+    "cross-env": "^7.0.3",
+    "crypto-browserify": "^3.12.1",
     "jest": "^26.6.0",
     "jest-html-reporter": "^3.10.2",
+    "react-scripts": "^5.0.1",
     "webpack": "^4.44.2"
   }
 }

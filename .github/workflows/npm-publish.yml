@@ -26,6 +26,12 @@ jobs:
     - name: Run build script
       run: npm run build
 
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifact
+        path: build/
+
   test:
     needs: build
     runs-on: ubuntu-latest
