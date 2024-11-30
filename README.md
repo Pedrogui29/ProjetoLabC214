@@ -28,3 +28,9 @@
    ```bash
    npm start
 4. Isso irá abrir seu navegador e acessar http://localhost:3000 para visualizar a aplicação
+5. Se quiser executar os testes
+   ```bash
+   npm test
+6. Se quiser gerar a versão otimizada de produção do projeto
+   ```bash
+   npm run build
