@@ -16,6 +16,10 @@ describe("Seat Component", () => {
     SetNameseat: mockSetNameseat,
   };
 
+  beforeEach(() => {
+    jest.clearAllMocks(); // Limpa os mocks antes de cada teste
+  });
+
   it("renders a free seat with the correct name", () => {
     render(<Seat {...seatProps} />);
     const seatButton = screen.getByText("1A");
@@ -134,6 +138,20 @@ describe("Seat Component", () => {
     // Valida estado final após as ações
     expect(mockSetPlaces).toHaveBeenLastCalledWith([1]);
     expect(mockSetNameseat).toHaveBeenLastCalledWith(["1A"]);
+  });
+
+  it("handles `free` state change dynamically", () => {
+    const { rerender } = render(<Seat {...seatProps} />);
+    const seatButton = screen.getByText("1A");
+
+    // Verifica o estilo inicial
+    expect(seatButton.closest("button")).toHaveStyle("background-color: #7B8B99");
+
+    // Atualiza o estado para `free: false` e verifica o estilo atualizado
+    rerender(<Seat {...seatProps} free={false} />);
+    const updatedButton = screen.getByText("1A"); // Reobtém o botão renderizado
+
+    expect(updatedButton.closest("button")).toHaveStyle("background-color: #F7C52B");
   });
 
 });
